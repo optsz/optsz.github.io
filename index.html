@@ -3,75 +3,230 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>МКП «Покровводоканал» — Матеріали</title>
+  <title>МКП «Покровводоканал» — ОП, ЦЗ та ПБ</title>
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 24px 16px;
       font-family: Arial, Helvetica, sans-serif;
       background-color: #f4f6f9;
       color: #222222;
     }
-    .card {
-      width: 100%;
-      max-width: 440px;
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
       background: #ffffff;
-      border-radius: 10px;
-      padding: 28px 24px;
+      border-radius: 12px;
+      padding: 24px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+    .header {
       text-align: center;
+      border-bottom: 1px solid #e5e9f0;
+      padding-bottom: 18px;
+      margin-bottom: 20px;
     }
     .logo {
-      width: 84px;
-      height: 84px;
+      width: 76px;
+      height: 76px;
       object-fit: contain;
-      margin: 0 auto 14px;
+      margin: 0 auto 10px;
       display: block;
     }
     h1 {
       margin: 0 0 6px;
-      font-size: 20px;
+      font-size: 21px;
       color: #0d3b66;
     }
-    p {
-      margin: 0 0 22px;
+    .subtitle {
+      margin: 0;
       font-size: 14px;
       color: #555555;
     }
-    .btn {
-      display: block;
-      text-decoration: none;
-      padding: 13px 16px;
-      margin-bottom: 12px;
-      border-radius: 7px;
+
+    /* Вкладки */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      flex: 1;
+      min-width: 160px;
+      padding: 12px 14px;
+      border: 2px solid #d0d8e5;
+      background-color: #f8fafc;
+      color: #0d3b66;
       font-size: 15px;
       font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
     }
-    .btn-test {
+    .tab-btn:hover {
+      background-color: #eef3f9;
+    }
+    .tab-btn.active {
+      background-color: #0d3b66;
+      border-color: #0d3b66;
+      color: #ffffff;
+    }
+
+    /* Вміст вкладок */
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #0d3b66;
+      margin: 18px 0 10px;
+      padding-left: 10px;
+      border-left: 4px solid #1b6ca8;
+    }
+    .section-title:first-child {
+      margin-top: 0;
+    }
+    .item-link {
+      display: block;
+      text-decoration: none;
+      padding: 12px 15px;
+      margin-bottom: 8px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: #f8fafc;
+      color: #1a202c;
+      border: 1px solid #dce3ec;
+    }
+    .item-link:hover {
+      background-color: #edf2f7;
+      border-color: #b8c4d4;
+    }
+    .item-test {
       background-color: #8b1e1e;
       color: #ffffff;
+      border-color: #8b1e1e;
     }
-    .btn-logo {
-      background-color: #1b6ca8;
-      color: #ffffff;
-      margin-bottom: 0;
+    .item-test:hover {
+      background-color: #741717;
+      border-color: #741717;
+    }
+    .item-doc {
+      background-color: #eef6fc;
+      color: #0d3b66;
+      border-color: #c2ddf2;
+    }
+    .item-doc:hover {
+      background-color: #dfeef9;
+    }
+    .empty-note {
+      font-size: 13px;
+      color: #718096;
+      font-style: italic;
+      margin: 6px 0 12px;
+    }
+    .footer-note {
+      margin-top: 24px;
+      padding-top: 14px;
+      border-top: 1px solid #e5e9f0;
+      text-align: center;
+      font-size: 12px;
+      color: #718096;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <img class="logo" src="https://optsz.github.io/vodokanal-logo/logo.png" alt="Логотип МКП Покровводоканал">
-    <h1>МКП «Покровводоканал»</h1>
-    <p>Швидкий перехід до доступних матеріалів</p>
-    <a class="btn btn-test" href="https://optsz.github.io/vodokanal-tests/test-op.html">
-      Тест з охорони праці
-    </a>
-    <a class="btn btn-logo" href="https://optsz.github.io/vodokanal-logo/logo.png" target="_blank">
-      Відкрити логотип (PNG)
-    </a>
+  <div class="container">
+    <div class="header">
+      <img class="logo" src="https://optsz.github.io/vodokanal-logo/logo.png" alt="Логотип МКП Покровводоканал">
+      <h1>МКП «Покровводоканал»</h1>
+      <p class="subtitle">Матеріали з охорони праці, цивільного захисту та пожежної безпеки</p>
+    </div>
+
+    <!-- Кнопки вкладок -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="openTab('op', this)">Охорона праці</button>
+      <button class="tab-btn" onclick="openTab('cz', this)">Цивільний захист</button>
+      <button class="tab-btn" onclick="openTab('pb', this)">Пожежна безпека</button>
+    </div>
+
+    <!-- ВКЛАДКА 1: ОХОРОНА ПРАЦІ -->
+    <div id="op" class="tab-content active">
+      <div class="section-title">Тести для перевірки знань</div>
+      <a class="item-link item-test" href="https://optsz.github.io/vodokanal-tests/test-op.html">
+        Загальний тест з охорони праці
+      </a>
+
+      <div class="section-title">Інструкції та плани підготовки</div>
+      <p class="empty-note">Розділ наповнюється...</p>
+      <!-- Приклад майбутнього посилання на PDF або HTML інструкцію:
+      <a class="item-link" href="files/op/instruktsiya-1.pdf" target="_blank">Інструкція з ОП №1 ...</a>
+      -->
+
+      <div class="section-title">Керівні документи</div>
+      <a class="item-link item-doc" href="https://zakon.rada.gov.ua/laws/show/2694-12" target="_blank">
+        Закон України «Про охорону праці»
+      </a>
+      <a class="item-link item-doc" href="https://zakon.rada.gov.ua/laws/show/z0231-05" target="_blank">
+        Типове положення про порядок проведення навчання і перевірки знань з питань ОП (НПАОП 0.00-4.12-05)
+      </a>
+    </div>
+
+    <!-- ВКЛАДКА 2: ЦИВІЛЬНИЙ ЗАХИСТ -->
+    <div id="cz" class="tab-content">
+      <div class="section-title">Тести для перевірки знань</div>
+      <p class="empty-note">Тести з цивільного захисту скоро будуть додані...</p>
+
+      <div class="section-title">Плани підготовки та пам'ятки</div>
+      <p class="empty-note">Розділ наповнюється...</p>
+
+      <div class="section-title">Керівні документи</div>
+      <a class="item-link item-doc" href="https://zakon.rada.gov.ua/laws/show/5403-17" target="_blank">
+        Кодекс цивільного захисту України
+      </a>
+      <a class="item-link item-doc" href="https://zakon.rada.gov.ua/laws/show/444-2013-%D0%BF" target="_blank">
+        Порядок здійснення навчання населення діям у надзвичайних ситуаціях (Постанова КМУ № 444)
+      </a>
+    </div>
+
+    <!-- ВКЛАДКА 3: ПОЖЕЖНА БЕЗПЕКА -->
+    <div id="pb" class="tab-content">
+      <div class="section-title">Тести для перевірки знань</div>
+      <p class="empty-note">Тести з пожежної безпеки скоро будуть додані...</p>
+
+      <div class="section-title">Інструкції та тренування</div>
+      <p class="empty-note">Розділ наповнюється...</p>
+
+      <div class="section-title">Керівні документи</div>
+      <a class="item-link item-doc" href="https://zakon.rada.gov.ua/laws/show/z0252-15" target="_blank">
+        Правила пожежної безпеки в Україні (НАПБ А.01.001-2014)
+      </a>
+    </div>
+
+    <div class="footer-note">
+      <a href="https://optsz.github.io/vodokanal-logo/logo.png" target="_blank" style="color: #718096;">Логотип підприємства (PNG)</a>
+    </div>
   </div>
+
+  <script>
+    function openTab(tabId, btn) {
+      var contents = document.querySelectorAll('.tab-content');
+      for (var i = 0; i < contents.length; i++) {
+        contents[i].classList.remove('active');
+      }
+      var buttons = document.querySelectorAll('.tab-btn');
+      for (var j = 0; j < buttons.length; j++) {
+        buttons[j].classList.remove('active');
+      }
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
 </body>
 </html>
